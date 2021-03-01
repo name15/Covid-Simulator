@@ -1,0 +1,55 @@
+{
+	"action-reaction": [
+		{0: 1, 1: 10},
+		{0: 17, 1: 2},
+		{0: 3, 1: 9},
+		{0: 18, 1: 4},
+		{0: 17, 1: 5},
+		{0: 6, 1: 7},
+		{0: 17, 1: 17},
+		{0: 17, 1: 8},
+		{0: 17, 1: 18},
+		{0: 19, 1: 15},
+		{0: 17, 1: 11},
+		{0: 12, 1: 13},
+		{0: 20, 1: 17},
+		{0: 14, 1: 16},
+		{0: 21, 1: 15},
+		{0: 19, 1: 17},
+		{0: 17, 1: 15},
+		{},
+		{},
+		{},
+		{},
+		{}
+	],
+	"language": {
+		"en": {
+			"actions": [
+				"Are you an adult?",
+				"Are you a dirtbag?",
+				"Do you have a demaging career?",
+				"At a laundromat?",
+				"As a nudist?",
+				"As a musician?",
+				"Are you on tour?",
+				"As a swim instructor or lifeguard?",
+				"As the leader of a biker gang?",
+				"Are you broke?",
+				"Are you a child?",
+				"Are you in high school?",
+				"Do your clothes smell somewhat unusual?",
+				"College?",
+				"Do you have enough money for laundry?",
+				"Are you a hygiene freak?",
+				"Are you a sasquatch?",
+				"Don't do laundry.",
+				"Do laundry.",
+				"Do underwear and socks in the sink.",
+				"Use some eyedrops, swish with mouthwash, open a window, take a shower, say you were burning incense, and do laundry.",
+				"Buy a beer."
+			],
+			"reactions": [ "Yes.", "No."]
+		}
+	}
+}
