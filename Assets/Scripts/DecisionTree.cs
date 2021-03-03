@@ -35,7 +35,7 @@ public class DecisionTree : MonoBehaviour
 
 	private List<DecisionTreeScheme.Action> actions;
 
-	private void Start()
+	private void OnEnable()
 	{
 		actions = JsonConvert.DeserializeObject<DecisionTreeScheme.Root>(jsonEvents.text).actions;		
 		DisplayAction(0);
