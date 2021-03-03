@@ -152,10 +152,10 @@ public class OrbitEarth : MonoBehaviour
 	}
 	
 	//DEBUG
-	private void OnGUI() {
+	/*private void OnGUI() {
 		GUIStyle style = new GUIStyle();
 		style.fontSize = 20;
 		style.normal.textColor = Color.white;
 		GUI.Label(new Rect(10, 10, 300, 10), cameraPos.ToString(), style);
-	}
+	}*/
 }

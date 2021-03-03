@@ -8,8 +8,6 @@ public class InfectEarth : MonoBehaviour
 	public Material EarthMaterial;
 	public TextAsset jsonCountries;
 
-	[Range(0, countryCount - 1)]
-	public int id; //TODO: TEMP
 	public string[] countries;
 
 	private float[] infectionStatus = new float[countryCount];
@@ -21,10 +19,5 @@ public class InfectEarth : MonoBehaviour
 
 	private void Start() {
 		countries = JsonConvert.DeserializeObject<CountriesScheme>(jsonCountries.text).array;
-	}
-
-	private void OnValidate() { //TODO: TEMP
-		infectionStatus = new float[countryCount];
-		InfectCountry(id, 1);
 	}
 }
