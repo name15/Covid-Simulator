@@ -2,56 +2,68 @@ Shader "Custom/Planet"
 {
 	Properties
 	{
-		// TODO: merge the two heightmaps
-		_WaterMask("Water Mask", 2D) = "white" {}
-		_HeightMap("Heightmap", 2D) = "white" {}
-		_Bathymetry("Bathymetry", 2D) = "white" {}
+		[Header(Physical map data)] 
+		_LandMask("Land-Water Mask", 2D) = "white" {}
 		
-		_ElevationStrength("Terrain height", Range(0, 10)) = 0.25
-		_WavesStrength("Waves height", Range(0, 10)) = 0.25
+		_Topography("Topography", 2D) = "white" {}
+		_Bathymetry("Bathymetry", 2D) = "white" {}
+
+		_ElevationMagnitude("Terrain magnitude", Range(0, 10)) = 0.25
+		_WavesMagnitude("Waves magnitude", Range(0, 10)) = 0.25
 
 		_WaterGradient("Water gradient", 2D) = "white" {}
 		_WavesNormalMap("Waves normal map", 2D) = "white" {}
+
+		[Space(25)] [Header(Political map data)]
+		_PoliticalMap("Political map", 2D) = "white" {}
+		_BorderMask("Country borders", 2D) = "white" {}
 	}
 	SubShader
 	{
 		Tags { "RenderType"="Opaque" }
-		LOD 300
+		LOD 500
 
-		CGPROGRAM
-		// Physically based Standard lighting model, shadows on all light types
+		CGPROGRAM	
 		#pragma surface surf Standard fullforwardshadows
-
 		#pragma target 3.0
 
-		#include "utils.cginc"
+		#include "utils.cginc" //Custom utils functions
+		#include "simplex.cginc"
+		
+		#define country_count 177. // WARNING: Must be manually set
 
 
 		struct Input
 		{
 			float3 worldPos;
 		};
-
-		struct country {
-			float2 coords; // In spherical coordinates
-		};
-
-		sampler2D _WaterMask;
-
-		sampler2D _HeightMap;
-		float _ElevationStrength;
-		float _WavesStrength;
 		
+		// Physical map data	
+		sampler2D _LandMask;
+
+		sampler2D _Topography;
 		sampler2D _Bathymetry;
-		
+
+		float _ElevationMagnitude;
+		float _WavesMagnitude;
+
 		sampler _WaterGradient;
 		sampler2D _WavesNormalMap;
-		
+
 		float getHeight(float2 uv) {
-			return tex2D(_HeightMap, uv);
+			return tex2D(_Topography, uv);
 		}
 
-		float4 bumpFromDepth(float2 uv, float2 resolution, float scale) {
+		// Political map data
+		sampler2D _PoliticalMap;
+		sampler2D _BorderMask;
+
+		// Country buffer data
+		uniform float _InfectionStatus[country_count];	//WARNING: Must be manually set from script
+
+		// Converts hiught to narmal map
+			// Depends on getHeight()
+		float4 Height2NormalMap(float2 uv, float2 resolution, float scale) {
 			float2 step = 1. / resolution;
 
 			float height = getHeight(uv);
@@ -59,7 +71,7 @@ Shader "Custom/Planet"
 			float2 dxy = height - float2(
 				getHeight(uv + float2(step.x, 0.)),
 				getHeight(uv + float2(0., step.y))
-			);
+				);
 
 			return float4(normalize(float3(dxy * scale / step, 1.)), height);
 		}
@@ -69,49 +81,54 @@ Shader "Custom/Planet"
 			float3 localPos = normalize(IN.worldPos- mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz);
 			float2 sphericalPos = cartesian2spherical(localPos);
 			
-
-
-			// Height effect
-			float4 elevNormal = bumpFromDepth(sphericalPos, float2(2048, 1024), 0.05); // WARNING: manually set texture resolution
-			elevNormal = lerp(float4(0, 0, 0, 0), elevNormal, _ElevationStrength);
-			// Will be applied only where there is no water
-
-			float3 wavesNormal = UnpackNormal(tex2D(_WavesNormalMap, frac((sphericalPos + float2(_CosTime.x, _SinTime.x) / 100) * 50))); // 100 - speed; 50 - amount of wrapping around the sphere
-			wavesNormal = lerp(float4(0, 0, 0, 0), wavesNormal, _WavesStrength);
-			// Will be applied only where there is water
-
-
-			// Render Ocean
-			float water = tex2D(_WaterMask, sphericalPos);
-			
-			float water0 = tex2D(_WaterMask, sphericalPos + float2(1. / 2048, 0)); // WARNING: manually set texture resolution
-			float water1 = tex2D(_WaterMask, sphericalPos - float2(0, 1. / 1024)); // WARNING: manually set texture resolution
-			float water2 = tex2D(_WaterMask, sphericalPos - float2(-1. / 2048, 0)); // WARNING: manually set texture resolution
-			float water3 = tex2D(_WaterMask, sphericalPos - float2(0, -1. / 1024)); // WARNING: manually set texture resolution
-
-			float water_min = min(min(water0, water1), min(water2, water3));
-			float water_max = max(max(water0, water1), max(water2, water3));
-
-			bool border = false; // Whether there is border
-
-			if (water > 0.5 || water_max > 0.25) {
-				if (water_min > 0.5) {
-					OUT.Smoothness = 0.6;
-					OUT.Normal += wavesNormal; // Apply water normal
-					OUT.Albedo = tex2D(_WaterGradient, tex2D(_Bathymetry, sphericalPos) );
-					return;
-				}
-
-				else border = true;
+			// Border Mask
+			bool border = tex2D(_BorderMask, sphericalPos) > 0.1;
+			if (border) {
+				// >>> Render borders <<<
+				OUT.Albedo = 0.15;
+				
+				// TODO: highlight countries (with gradient tex)
+				
+				return;
 			}
 
-			OUT.Normal += elevNormal; // Apply terrain normal
+			// Water-Land mask
+			float land = tex2D(_LandMask, sphericalPos);
+			if (land < 0.5) {
+				// >>> Render Ocean <<<
+				OUT.Smoothness = 0.5;
+				OUT.Albedo = tex2D(_WaterGradient, tex2D(_Bathymetry, sphericalPos));
+				
+				// > Compute (moving) waves normals <
+				float3 wavesNormal = UnpackNormal(
+					tex2D(
+						_WavesNormalMap,
+						frac((sphericalPos + float2(_CosTime.x, _SinTime.x) / 100) * 10 * float2(5, 3)) // Make waves move over time
+					)
+				);
+				wavesNormal = lerp(float4(0, 0, 0, 0), wavesNormal, _WavesMagnitude); // Set waves magnitude
+				OUT.Normal += wavesNormal; // Set waves normal
 
-			float3 col = localPos;
+				return;
+			}
 
-			if (border) OUT.Albedo = col / 2;
-			else OUT.Albedo = col;
+
+			// >>> Render Terrain <<<
+			// > Compute terrain normals <
+			float4 elevNormal = Height2NormalMap(sphericalPos, float2(2048, 1024), 0.05); // WARNING: manually set texture resolution
+			elevNormal = lerp(float4(0, 0, 0, 0), elevNormal, _ElevationMagnitude); // Set elevation magnitude
 			
+			OUT.Normal += elevNormal; // Set terrain normal
+
+
+			// >>> Render Political map <<<
+			float countryId = round(tex2D(_PoliticalMap, sphericalPos) * 177.);
+			OUT.Albedo = float2hue(tex2D(_PoliticalMap, sphericalPos)) / 1.5;
+
+			// >>> Covid map <<<
+			float covid = snoise(localPos * 50. + _Time.y) + 0.5;
+			OUT.Albedo.gb -= _InfectionStatus[countryId];
+			OUT.Albedo.r += covid * _InfectionStatus[countryId];
 		}
 		ENDCG
 	}

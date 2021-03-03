@@ -24,6 +24,28 @@ float3 hash33(float3 p3)
 
 }
 
+// hash11 based 3d value noise
+// function taken from https://www.shadertoy.com/view/XslGRr
+// Created by inigo quilez - iq/2013
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+
+// ported from GLSL to HLSL
+
+float noise(float3 x)
+{
+    // The noise function returns a value in the range -1.0f -> 1.0f
+
+    float3 p = floor(x);
+    float3 f = frac(x);
+
+    f = f * f * (3.0 - 2.0 * f);
+    float n = p.x + p.y * 57.0 + 113.0 * p.z;
+
+    return lerp(lerp(lerp(hash11(n + 0.0), hash11(n + 1.0), f.x),
+                   lerp(hash11(n + 57.0), hash11(n + 58.0), f.x), f.y),
+               lerp(lerp(hash11(n + 113.0), hash11(n + 114.0), f.x),
+                   lerp(hash11(n + 170.0), hash11(n + 171.0), f.x), f.y), f.z);
+}
 
 /* Colors */
 
