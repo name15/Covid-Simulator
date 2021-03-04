@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f08f6a870aa4d142a0323f7f3655682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonEvents: {fileID: 4900000, guid: 426d4a82e46932a4dab5dfe5c6cf090f, type: 3}
+  xmlActions: {fileID: 4900000, guid: e22565eeb7c29fe48945118505cd9951, type: 3}
   infect: {fileID: 1364688004}
   orbit: {fileID: 519420030}
   TitleText: {fileID: 1985992328}
@@ -781,7 +781,7 @@ MonoBehaviour:
   lightOffset: {x: -0.5, y: 0.1}
   rotationSpeed: 7.5
   scaleSpeed: 15
-  movementSmoothness: 0.75
+  movementSmoothness: 0.6
   secondaryMovementSmoothness: 0.9
   poleLimit: 0.1
   scaleMin: 5.5
@@ -1062,7 +1062,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EarthMaterial: {fileID: 2100000, guid: eaa02211b5068c04ca773b44877fc008, type: 2}
   jsonCountries: {fileID: 4900000, guid: eef95631adc00fd42a96050e4bd6d27d, type: 3}
-  id: 0
   countries: []
 --- !u!33 &1364688005
 MeshFilter:
@@ -1267,7 +1266,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 5
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1336,7 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.05882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1665,7 +1664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

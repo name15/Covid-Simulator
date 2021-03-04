@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<actions>
+	<!-- 0 -->
+	<action>
+		<title>Идентифициран е нов вирус в Ухан</title>
+		<infect>
+			<country id="29" level="0.4"/>	
+		</infect>
+		<question>Какво правиш?</question>
+		<answers>
+			<answer action="1">Предупреди хората</answer>			
+			<answer action="2">Пази го в тайна</answer>			
+		</answers>
+	</action>
+</actions>

@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<actions>
+	<!-- 0 -->
+	<action>
+		<title>Идентифициран е нов вирус в Ухан</title>
+		<infect>
+			<country id="29" level="0.4"/>	
+		</infect>
+		<question>Какво правиш?</question>
+		<answers>
+			<answer action="1">Предупреди хората</answer>			
+			<answer action="2">Пази го в тайна</answer>			
+		</answers>
+	</action>
+	
+	<!-- 1 -->
+	<action>
+		<title>Коронавирусът е ограничен в Ухан</title>
+		<infect></infect>
+		<question>Затвори града?</question>
+		<answers>
+			<answer action="3">Да</answer>			
+			<answer action="2">Не</answer>			
+		</answers>
+	</action>
+	
+	<!-- 2 -->
+	<action>
+		<title>Вирусът бързо се разпространява из цял Китай</title>
+		<infect>
+			<country id="29" level="0.6"/>
+		</infect>
+		<question>Постави хората под карантина?</question>
+		<answers>
+			<answer action="5">Да</answer>			
+			<answer action="4">Не</answer>			
+		</answers>
+	</action>
+	
+	<!-- 3 -->
+	<action>
+		<title>Вирусът се разпространява само в Южен Китай</title>
+		<infect>
+			<country id="29" level="0.5"/>
+		</infect>
+		<question>Започни разработката на лекарство?</question>
+		<answers>
+			<answer action="2">Да</answer>
+			<answer action="2">Не</answer>
+		</answers>
+	</action>
+	
+	<!-- 4 -->
+	<action>
+		<title>Коронавирусът е още в Китай</title>
+		<infect>
+			<country id="29" level="0.6"/>
+		</infect>	  
+		<question>Сигурен ли си?</question>
+		<answers>
+			<answer action="7">Да, не карантинирай нито един човек, който не е тежко болен!</answer>
+			<answer action="8">Не, нека всички заразени и контактни влязат под карантина.</answer>
+		</answers>
+	</action>
+	
+	<!-- 5 -->
+	<action>
+		<title>Коронавирусът е в Китай</title>
+		<infect></infect>
+		<question>Забрани на повечето здрави хора да излизат?</question>
+		<answers>
+			<answer action="7">Да</answer>
+			<answer action="7">Не</answer>
+		</answers>
+	</action>
+
+	<!-- 6 -->
+	<action>
+		<title>Коронавирусът остава в Китай</title>
+		<infect></infect>
+		<question>Затвори всички училища?</question>
+		<answers>
+			<answer action="7">Да</answer>
+			<answer action="7">Не</answer>
+		</answers>
+	</action>
+	
+	<!-- 7 -->
+	<action>
+		<title>Коронавирусът още е в Китай</title>
+		<infect>
+			<country id="29" level="1"/>
+		</infect>
+		<question>Затвори цялата страна</question>
+		<answers>
+			<answer action="8">Да</answer>
+			<answer action="9">Не</answer>
+		</answers>
+	</action>
+	
+	<!-- 8 -->
+	<action>
+		<title>Въпреки че страната е затворена вирусът се разпространява и в Европа</title>
+		<infect>
+			<country id="29" level="0.5"/>
+		</infect>
+		<question></question>
+		<answers>
+			<answer action="9">Продължи играта в Европа.</answer>
+		</answers>
+	</action>
+	
+	<!-- 9 -->
+	<action>
+		<title>Открита е полижителна проба на коронавирус в северна Италия</title>	<!-- TODO -->
+		<infect>
+			<country id="76" level="0.3"/>
+		</infect>
+		<question>Какво правиш?</question>
+		<answers>
+			<answer action="10">Взимаш мерки</answer>
+			<answer action="13">Нищо</answer>
+		</answers>
+	</action>
+		
+	<!-- 10 -->
+	<action>
+		<title>Вирусът е в севрна Италия</title>
+		<infect>
+			<country id="76" level="0.4"/>
+		</infect>
+		<question>Слагаш ли заразените в карантина?</question>
+		<answers>
+			<answer action="11">Да</answer>
+			<answer action="13">Не</answer>
+		</answers>
+	</action>
+		
+	<!-- 11 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="0.45"/>			
+		</infect>
+		<question>Затваряш ли областите и градовете?</question>
+		<answers>
+			<answer action="12">Да</answer>
+			<answer action="13">Не</answer>
+		</answers>
+	</action>
+		
+	<!-- 12 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="0.5"/>
+		</infect>
+		<question>Затваряш ли всички обществени места?</question>
+		<answers>
+			<answer action="15">Да</answer>
+			<answer action="15">Не</answer>
+		</answers>
+	</action>
+
+	<!-- 13 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="0.6"/>			
+		</infect>
+		<question>Сега каниш ли цялото население на страната да пият италианско вино заедно?</question>
+		<answers>
+			<answer action="14">Да</answer>
+			<answer action="11">Не, разбира се!</answer>
+		</answers>
+	</action>
+		
+	<!-- 14 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="0.8"/>
+		</infect>
+		<question>А сега?</question>
+		<answers>
+			<answer action="19">Взимаш мерки</answer>
+			<answer action="18">Молиш се на Господ</answer>
+		</answers>
+	</action>
+
+	<!-- 15 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="0.8"/>
+		</infect>
+		<question>Въвеждаш ли вечерен час? (В Италия си, хората няма да харесат това!)</question>
+		<answers>
+			<answer action="16">Да</answer>
+			<answer action="18">Не</answer>
+		</answers>
+	</action>
+
+	<!-- 16 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="1"/>
+		</infect>
+		<question>Затваряш ли цялата страна?</question>
+		<answers>
+			<answer action="17">Да</answer>
+			<answer action="20">Не</answer>
+		</answers>
+	</action>
+
+	<!-- 17 -->
+	<action>
+		<title>Минимални жертви</title>
+		<infect>
+			<country id="53" level="0.1"/>
+			<country id="58" level="0.1"/>
+		</infect>
+		<question>Затвори страната и вирусът не се разпространи много в Европа. Браво!</question>
+		<answers>
+			<answer action="18">ОК</answer>
+		</answers>
+	</action>
+
+	<!-- 18 -->
+	<action>
+		<title>Вирусът стига и до САЩ</title>
+		<infect>
+			<country id="53" level="0.2"/>
+			<country id="58" level="0.3"/>
+			<country id="147" level="0.1"/>
+			<country id="168" level="0.4"/>
+		</infect>
+		<question></question>
+		<answers>
+			<answer action="21">Продължи</answer>
+		</answers>
+	</action>
+	
+	<!-- 19 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="76" level="1"/>			
+		</infect>
+		<question>Късно!</question>
+		<answers>
+			<answer action="18">ОК</answer>
+		</answers>
+	</action>
+	
+	<!-- 20 -->
+	<action>
+		<title>Вирусът е в цяла Италия</title>
+		<infect>
+			<country id="53" level="0.3"/>
+			<country id="58" level="0.5"/>
+			<country id="147" level="0.2"/>
+			<country id="168" level="0.4"/>
+		</infect>
+		<question>Вирусът се разпространява и в други части на Европа</question>
+		<answers>
+			<answer action="18">ОК</answer>
+		</answers>
+	</action>
+
+	<!--21-->
+	<action>
+		<title>Вирусът е в Сиатъл</title>
+		<infect>
+			<country id="168" level="0.4"/>
+		</infect>
+		<question>Какво правиш?</question>
+		<answers>
+			<answer action="22">Взимам мерки срещу вируса</answer>
+			<answer action="25">Преструвамсе, че вирусът е измзма</answer>
+		</answers>
+	</action>
+	
+	<!--22-->
+	<action>
+		<title>Вирусът е в Сиатъл</title>
+		<infect>
+			<country id="168" level="0.4"/>
+		</infect>
+		<question>Слагаш ли хората с Ковид в карантина?</question>
+		<answers>
+			<answer action="23">Да</answer>
+			<answer action="25">Не, вирусът сам ще си изчезне</answer>
+		</answers>
+	</action>
+	
+	<!--23-->
+	<action>
+		<title>Вирусът е в северната част на САЩ</title>
+		<infect>
+			<country id="168" level="0.5"/>
+		</infect>
+		<question>Затваряш ли всички заведения и обществени места?</question>
+		<answers>
+			<answer action="24">Да</answer>
+			<answer action="26">Не</answer>
+		</answers>
+	</action>
+	
+	<!--24-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="0.6"/>
+		</infect>
+		<question>Инвестираш ли във ваксина?</question>
+		<answers>
+			<answer action="26">Да</answer>
+			<answer action="26">Не</answer>
+		</answers>
+	</action>
+	
+	<!--25-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="0.6"/>
+		</infect>
+		<question>Какво правиш?</question>
+		<answers>
+			<answer action="22">Водя страната си</answer>
+			<answer action="30">Играя голф във Флорида</answer>
+		</answers>
+	</action>
+	
+	<!--26-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="0.6"/>
+		</infect>
+		<question>Какво съветваш хората?</question>
+		<answers>
+			<answer action="27">Да седят вкъщи и да внимават</answer>
+			<answer action="30">Да пият белина и да си инжектират дезинфектант</answer>
+		</answers>
+	</action>
+	
+	<!--27-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="0.6"/>
+		</infect>
+		<question>А слушаш ли докторите?</question>
+		<answers>
+			<answer action="28">Да, разбира се</answer>
+			<answer action="29">Не, те са измамници</answer>
+		</answers>
+	</action>
+	
+	<!--28-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="0.2"/>
+		</infect>
+		<question>Браво! Пандемията е с минимални жертви</question>
+		<answers>
+			<answer action="31">Ок</answer>
+		</answers>
+	</action>
+	
+	<!--29-->
+	<action>
+		<title>Вирусът е в цялата страна</title>
+		<infect>
+			<country id="168" level="1"/>
+		</infect>
+		<question>Не са измамници, трябва да ги слушаш. Губиш изборите.</question>
+		<answers>
+			<answer action="31">Ок</answer>
+		</answers>
+	</action>
+	
+	<!--30-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect>
+			<country id="168" level="1"/>
+		</infect>
+		<question>Максимални жертви, губиш изборите</question>
+		<answers>
+			<answer action="31">Ок</answer>
+		</answers>
+	</action>
+	
+	<!--31-->
+	<action>
+		<title>Вирусът е в цялата държава</title>
+		<infect></infect>
+		<question>Играта свърши</question>
+		<answers></answers> <!-- Will automatically add return to menu button -->
+	</action>	
+</actions>

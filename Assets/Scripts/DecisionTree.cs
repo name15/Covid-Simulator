@@ -1,29 +1,62 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
+using System.IO;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Xml;
+using System.Xml.Serialization;
 
-public partial class CountriesScheme {
-	[JsonProperty("countries")]
-	public string[] array;
-}
-
-namespace DecisionTreeScheme {    
-	public partial class Root {
-		public List<Action> actions;
+namespace DecisionTreeScheme {
+	[XmlRoot(ElementName = "country")]
+	public class Country {
+		[XmlAttribute(AttributeName = "id")]
+		public int Id;
+		[XmlAttribute(AttributeName = "level")]
+		public float Level;
 	}
 
-	public partial class Action {
-		public string title;
-		public Dictionary<int, float> infect;
-		public string question;
-		public Dictionary<string, int> answers;
+	[XmlRoot(ElementName = "infect")]
+	public class Infect {
+		[XmlElement(ElementName = "country")]
+		public List<Country> Country;
+	}
+
+	[XmlRoot(ElementName = "answer")]
+	public class Answer {
+		[XmlAttribute(AttributeName = "action")]
+		public int Action;
+		[XmlText]
+		public string Text;
+	}
+
+	[XmlRoot(ElementName = "answers")]
+	public class Answers {
+		[XmlElement(ElementName = "answer")]
+		public List<Answer> Answer;
+	}
+
+	[XmlRoot(ElementName = "action")]
+	public class Action {
+		[XmlElement(ElementName = "title")]
+		public string Title;
+		[XmlElement(ElementName = "infect")]
+		public Infect Infect;
+		[XmlElement(ElementName = "question")]
+		public string Question;
+		[XmlElement(ElementName = "answers")]
+		public Answers Answers;
+	}
+
+	[XmlRoot(ElementName = "actions")]
+	public class Actions {
+		[XmlElement(ElementName = "action")]
+		public List<Action> Action;
 	}
 }
 
 public class DecisionTree : MonoBehaviour
 {
-	public TextAsset jsonEvents;
+	public TextAsset xmlActions;
 
 	public InfectEarth infect;
 	public OrbitEarth orbit;
@@ -33,25 +66,33 @@ public class DecisionTree : MonoBehaviour
 	public Transform ButtonContainer;
 	public GameObject ButtonPrefab;
 
-	private List<DecisionTreeScheme.Action> actions;
+	private DecisionTreeScheme.Actions actions;
 
-	private void OnEnable()
-	{
-		actions = JsonConvert.DeserializeObject<DecisionTreeScheme.Root>(jsonEvents.text).actions;		
+	private void Start() {
+		string xml = xmlActions.text;
+		var serializer = new XmlSerializer(typeof(DecisionTreeScheme.Actions));
+		
+		using (TextReader reader = new StringReader(xml)) {
+			actions = (DecisionTreeScheme.Actions)serializer.Deserialize(reader);
+		}
+
+		Debug.Log(actions.Action[0].Infect.Country[0].Id);
+
 		DisplayAction(0);
 	}
-
 	public void DisplayAction(int actionID) {
-		DecisionTreeScheme.Action action = actions[actionID];
+		Debug.Log(actionID);
+		DecisionTreeScheme.Action action = actions.Action[actionID];
 
 		// Infect Countries
-		foreach (int i in action.infect.Keys) {
-			infect.InfectCountry(i, action.infect[i]);
+		foreach (DecisionTreeScheme.Country country in action.Infect.Country) {
+			infect.InfectCountry(country.Id, country.Level);
 		}
 
 		// Rotate camera
 		switch (actionID) {
 			case 0:
+				orbit.SetView(new Vector3(1.75f, 0.6f, 7.5f));
 				orbit.SetView(new Vector3(1.75f, 0.6f, 7.5f));
 				break;
 			case 9:
@@ -63,19 +104,19 @@ public class DecisionTree : MonoBehaviour
 		}
 
 		// Display action title, question & button text
-		TitleText.text = action.title;
-		QuestionText.text = action.question;
+		TitleText.text = action.Title;
+		QuestionText.text = action.Question;
 
 		foreach (Transform button in ButtonContainer) Destroy(button.gameObject); // Destroy all previous buttons
 
-		if (action.answers.Keys.Count > 0) {
-			foreach (string key in action.answers.Keys) {
+		if (action.Answers.Answer.Count > 0) {
+			foreach (DecisionTreeScheme.Answer answer in action.Answers.Answer) {
 				GameObject button = Instantiate(ButtonPrefab, ButtonContainer); // Create new Button in Button Comtainer
 
 				TMPro.TextMeshProUGUI ButtonText = button.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
-				int resultingAction = action.answers[key];
+				int resultingAction = answer.Action;
 
-				ButtonText.text = key;
+				ButtonText.text = answer.Text;
 				button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate () {  // Call this method recursively on click
 					DisplayAction(resultingAction);
 				});
@@ -88,37 +129,4 @@ public class DecisionTree : MonoBehaviour
 			});
 		}
 	}
-
-	/*
-	public void DisplayAction(int actionID) {
-		var action_reaction = tree.action_reaction[actionID]; //TODO: check if it's being passed by reference
-
-		string currentAction = tree.language[language].actions[actionID];
-
-		Debug.Log("Action: " + currentAction); //TODO: temp
-		actionText.text = currentAction; // Set action text
-
-		foreach (Transform button in ButtonContainer) Destroy(button.gameObject);// Destroy all previous buttons
-
-		if (action_reaction.Keys.Count > 0) {
-			foreach (int reactionID in action_reaction.Keys) {
-				string possibleReaction = tree.language[language].reactions[reactionID];
-				int resultingAction = action_reaction[reactionID];
-
-				Debug.Log(possibleReaction + ": " + resultingAction); //TODO: temp
-				GameObject button = Instantiate(ButtonPrefab, ButtonContainer); // Create new Button
-				button.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = possibleReaction; //Set the text of the new button
-				button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate () {  // Call this method recursively when on click
-					DisplayAction(resultingAction);
-				});
-			}
-		} else {
-			GameObject button = Instantiate(ButtonPrefab, ButtonContainer);
-			button.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "\u21BB"; //TODO: make available in many languages (a whole new menu necessary)
-			button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(delegate () {  // Call this method recursively when on click
-				DisplayAction(0);
-			});
-		}
-	}
-	*/
 }

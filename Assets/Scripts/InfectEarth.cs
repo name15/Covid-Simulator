@@ -1,23 +1,18 @@
 using UnityEngine;
-using Newtonsoft.Json;
 
 public class InfectEarth : MonoBehaviour
 {
-	const int countryCount = 177;
+	const int countryCount = 177; //WARNING: must be manually set
 
 	public Material EarthMaterial;
 	public TextAsset jsonCountries;
 
 	public string[] countries;
 
-	private float[] infectionStatus = new float[countryCount];
+	private float[] infectionLevel = new float[countryCount];
 
 	public void InfectCountry(int countryId, float value) {
-		infectionStatus[countryId] = value;
-		EarthMaterial.SetFloatArray("_InfectionStatus", infectionStatus);
-	}
-
-	private void Start() {
-		countries = JsonConvert.DeserializeObject<CountriesScheme>(jsonCountries.text).array;
+		infectionLevel[countryId] = value;
+		EarthMaterial.SetFloatArray("_InfectionStatus", infectionLevel);
 	}
 }
