@@ -10,7 +10,7 @@ public class PlayButton : MonoBehaviour
 		
 	public void QuitGame()
 	{
-		Debug.Log("quit!");
+		Debug.Log("Application.Quit");
 		Application.Quit();
 	}
 }

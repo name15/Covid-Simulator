@@ -100,7 +100,7 @@
 	
 	<!-- 8 -->
 	<action>
-		<title>Въпреки че страната е затворена вирусът се разпространява и в Европа</title>
+		<title>Въпреки че страната е затворена, вирусът се разпространява и в Европа.</title>
 		<infect>
 			<country id="29" level="0.5"/>
 		</infect>
@@ -168,7 +168,7 @@
 		<infect>
 			<country id="76" level="0.6"/>			
 		</infect>
-		<question>Сега каниш ли цялото население на страната да пият италианско вино заедно?</question>
+		<question>Каниш ли цялото население на страната да пият италианско вино заедно?</question>
 		<answers>
 			<answer action="14">Да</answer>
 			<answer action="11">Не, разбира се!</answer>
@@ -263,7 +263,7 @@
 			<country id="147" level="0.2"/>
 			<country id="168" level="0.4"/>
 		</infect>
-		<question>Вирусът се разпространява и в други части на Европа</question>
+		<question>Вирусът се разпространява и в други части на Европа.</question>
 		<answers>
 			<answer action="18">ОК</answer>
 		</answers>
@@ -278,7 +278,7 @@
 		<question>Какво правиш?</question>
 		<answers>
 			<answer action="22">Взимам мерки срещу вируса</answer>
-			<answer action="25">Преструвамсе, че вирусът е измзма</answer>
+			<answer action="25">Преструвам се, че вирусът е измама</answer>
 		</answers>
 	</action>
 	
@@ -366,7 +366,7 @@
 		<infect>
 			<country id="168" level="0.2"/>
 		</infect>
-		<question>Браво! Пандемията е с минимални жертви</question>
+		<question>Браво! Пандемията приключва с минимални жертви.</question>
 		<answers>
 			<answer action="31">Ок</answer>
 		</answers>
@@ -390,7 +390,7 @@
 		<infect>
 			<country id="168" level="1"/>
 		</infect>
-		<question>Максимални жертви, губиш изборите</question>
+		<question>Максимални жертви, губиш изборите.</question>
 		<answers>
 			<answer action="31">Ок</answer>
 		</answers>
@@ -401,6 +401,6 @@
 		<title>Вирусът е в цялата държава</title>
 		<infect></infect>
 		<question>Играта свърши</question>
-		<answers></answers> <!-- Will automatically add return to menu button -->
+		<answers></answers> <!-- Will automatically add "return to menu" button -->
 	</action>	
 </actions>

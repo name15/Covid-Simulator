@@ -15,7 +15,7 @@ public class OrbitEarth : MonoBehaviour
 	public float movementSmoothness = 0.75f;
 	[Range(0, 1)]
 	public float secondaryMovementSmoothness = 0.9f; // TODO: use parabolic interpolation
-
+	
 
 	// Limit camera movement
 	[Range(0.001f, Mathf.PI / 2)]
@@ -136,9 +136,13 @@ public class OrbitEarth : MonoBehaviour
 
 	private void FixedUpdate() {
 		// Move with smoothening effect (using movementSmoothness / secondaryMovementSmoothness)
-		float smooth = useSecondaryMovementSmoothness ? secondaryMovementSmoothness : movementSmoothness;
+		float smooth = useSecondaryMovementSmoothness ? secondaryMovementSmoothness :  movementSmoothness;
 		cameraPos = Vector3.Lerp(cameraPos, initCameraPos + updateCameraPos, 1 - smooth);
 		
+		if (Vector3.Distance(cameraPos, initCameraPos + updateCameraPos) < 0.025f) {
+			useSecondaryMovementSmoothness = false;
+		}
+
 		Vector3 pos = cameraPos;
 
 		// Move Camera

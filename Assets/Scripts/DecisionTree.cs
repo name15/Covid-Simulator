@@ -76,12 +76,9 @@ public class DecisionTree : MonoBehaviour
 			actions = (DecisionTreeScheme.Actions)serializer.Deserialize(reader);
 		}
 
-		Debug.Log(actions.Action[0].Infect.Country[0].Id);
-
 		DisplayAction(0);
 	}
 	public void DisplayAction(int actionID) {
-		Debug.Log(actionID);
 		DecisionTreeScheme.Action action = actions.Action[actionID];
 
 		// Infect Countries

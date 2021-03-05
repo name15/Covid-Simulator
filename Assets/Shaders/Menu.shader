@@ -44,8 +44,9 @@ Shader "Custom/Menu"
 			{
 				float tex = tex2D(_MainTex, i.uv);
 				float2 p = i.vertex / 10. + 10. * float2(_CosTime.x, _SinTime.x);
-				fixed4 col = float4(1, 0, 0, 0) * tex * (snoise(p) + 0.75) / abs(_CosTime.y);
-				return col / 5;
+				float4 col = float4(1, 0, 0, 0) * tex * (snoise(p) + 0.75) / abs(_CosTime.y);
+				col.r = min(0.8, col.r);
+				return col;
 			}
 			ENDCG
 		}

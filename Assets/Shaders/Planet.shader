@@ -30,7 +30,7 @@ Shader "Custom/Planet"
 		#include "utils.cginc" //Custom utils functions
 		#include "simplex.cginc"
 		
-		#define country_count 177. // WARNING: Must be manually set
+		#define country_count 177. // WARNING: Must be set manually
 
 
 		struct Input
