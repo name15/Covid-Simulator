@@ -76,7 +76,7 @@ Material:
     - _MirrorOnBack: 0
     - _Mode: 0
     - _NumPoints: 500
-    - _NumStars: 350
+    - _NumStars: 615
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Randomization: 3.14

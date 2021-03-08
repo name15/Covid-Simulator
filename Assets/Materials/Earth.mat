@@ -90,7 +90,7 @@ Material:
     m_Floats:
     - _Alpha: 248
     - _Blend2: 1
-    - _ElevationMagnitude: 0.25
+    - _ElevationMagnitude: 3.5
     - _ElevationStrength: 0.25
     - _Glossiness: 0
     - _Metallic: 0
@@ -99,7 +99,7 @@ Material:
     - _Prop1: 0
     - _Strength: 0.9
     - _WaterNormalStrength: 0.25
-    - _WavesMagnitude: 0.2
+    - _WavesMagnitude: 3.47
     - _WavesStrength: 0.25
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
