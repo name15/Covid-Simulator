@@ -1,4 +1,4 @@
-Covid-2019 Simulatior
+Covid-Simulatior
 -----
 
 ### Play online now: [name15.github.io/Covid-Simulator](https://name15.github.io/Covid-Simulator/)
